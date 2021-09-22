@@ -19,6 +19,7 @@ from wtforms.validators import (
 )
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from bleach.sanitizer import Cleaner
 import datetime
 import os
 import json
@@ -47,8 +48,10 @@ class Plan(db.Model):
     )
 
     def as_dict(self):
-        return dict(shareId=self.id, title=self.title, plan=self.plan,
-                    sql=self.sql,)
+        cleaner = Cleaner()
+        return dict(shareId=self.id, title=self.title,
+                    plan=cleaner.clean(self.plan),
+                    sql=cleaner.clean(self.sql),)
 
 
 @app.route('/')

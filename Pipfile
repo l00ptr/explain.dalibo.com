@@ -11,6 +11,7 @@ psycopg2-binary = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
 flask-wtf = "*"
+bleach = "*"
 
 [requires]
 python_version = "3.7"
